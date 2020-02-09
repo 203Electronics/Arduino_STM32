@@ -6,6 +6,254 @@ menu.upload_method=Upload method
 menu.cpu_speed=CPU Speed(MHz)
 menu.opt=Optimize
 
+###################### Launchpad MK2 ########################################
+
+launchpad_mk2.name=Launchpad MK2
+launchpad_mk2.vid.0=0x1EAF
+launchpad_mk2.pid.0=0x0004
+launchpad_mk2.build.variant=launchpad_mk2
+launchpad_mk2.build.vect=VECT_TAB_ADDR=0x8000000
+launchpad_mk2.build.core=maple
+launchpad_mk2.build.board=GENERIC_STM32F103C
+launchpad_mk2.build.error_led_port=GPIOC
+launchpad_mk2.build.error_led_pin=13
+launchpad_mk2.upload.use_1200bps_touch=false
+launchpad_mk2.upload.file_type=bin
+launchpad_mk2.upload.auto_reset=true
+launchpad_mk2.upload.tool=maple_upload
+launchpad_mk2.upload.protocol=maple_dfu
+
+launchpad_mk2.menu.device_variant.STM32F103CB=STM32F103CB (20k RAM. 128k Flash)
+launchpad_mk2.menu.device_variant.STM32F103CB.build.cpu_flags=-DMCU_STM32F103CB
+launchpad_mk2.menu.device_variant.STM32F103CB.build.ldscript=ld/jtag.ld
+launchpad_mk2.menu.device_variant.STM32F103CB.upload.maximum_size=131072
+launchpad_mk2.menu.device_variant.STM32F103CB.upload.maximum_data_size=20480
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+launchpad_mk2.menu.upload_method.DFUUploadMethod=STM32duino bootloader
+launchpad_mk2.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+launchpad_mk2.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+launchpad_mk2.menu.upload_method.DFUUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+launchpad_mk2.menu.upload_method.DFUUploadMethod.build.vect=VECT_TAB_ADDR=0x8002000
+launchpad_mk2.menu.upload_method.DFUUploadMethod.build.ldscript=ld/bootloader_20.ld
+launchpad_mk2.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
+launchpad_mk2.menu.upload_method.DFUUploadMethod.upload.altID=2
+
+launchpad_mk2.menu.upload_method.serialMethod=Serial
+launchpad_mk2.menu.upload_method.serialMethod.upload.protocol=maple_serial
+launchpad_mk2.menu.upload_method.serialMethod.upload.tool=serial_upload
+launchpad_mk2.menu.upload_method.serialMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
+
+launchpad_mk2.menu.upload_method.STLinkMethod=STLink
+launchpad_mk2.menu.upload_method.STLinkMethod.upload.protocol=STLink
+launchpad_mk2.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+launchpad_mk2.menu.upload_method.STLinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
+
+launchpad_mk2.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+launchpad_mk2.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+launchpad_mk2.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+launchpad_mk2.menu.upload_method.BMPMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG
+
+launchpad_mk2.menu.upload_method.jlinkMethod=JLink
+launchpad_mk2.menu.upload_method.jlinkMethod.upload.protocol=jlink
+launchpad_mk2.menu.upload_method.jlinkMethod.upload.tool=jlink_upload
+launchpad_mk2.menu.upload_method.jlinkMethod.build.upload_flags=-DCONFIG_MAPLE_MINI_NO_DISABLE_DEBUG=1 -DSERIAL_USB -DGENERIC_BOOTLOADER
+
+launchpad_mk2.menu.upload_method.HIDUploadMethod=HID bootloader 2.0
+launchpad_mk2.menu.upload_method.HIDUploadMethod.upload.tool=hid_upload
+launchpad_mk2.menu.upload_method.HIDUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+launchpad_mk2.menu.upload_method.HIDUploadMethod.build.vect=VECT_TAB_ADDR=0x8001000
+launchpad_mk2.menu.upload_method.HIDUploadMethod.build.ldscript=ld/hid_bootloader.ld
+
+#-- CPU Clock frequency
+launchpad_mk2.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
+launchpad_mk2.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
+
+launchpad_mk2.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
+launchpad_mk2.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
+
+launchpad_mk2.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
+launchpad_mk2.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
+
+#-- Optimizations
+launchpad_mk2.menu.opt.osstd=Smallest (default)
+#launchpad_mk2.menu.opt.oslto=Smallest Code with LTO
+#launchpad_mk2.menu.opt.oslto.build.flags.optimize=-Os -flto
+#launchpad_mk2.menu.opt.oslto.build.flags.ldspecs=-flto
+launchpad_mk2.menu.opt.o1std=Fast (-O1)
+launchpad_mk2.menu.opt.o1std.build.flags.optimize=-O1
+launchpad_mk2.menu.opt.o1std.build.flags.ldspecs=
+#launchpad_mk2.menu.opt.o1lto=Fast (-O1) with LTO
+#launchpad_mk2.menu.opt.o1lto.build.flags.optimize=-O1 -flto
+#launchpad_mk2.menu.opt.o1lto.build.flags.ldspecs=-flto
+launchpad_mk2.menu.opt.o2std=Faster (-O2)
+launchpad_mk2.menu.opt.o2std.build.flags.optimize=-O2
+launchpad_mk2.menu.opt.o2std.build.flags.ldspecs=
+#launchpad_mk2.menu.opt.o2lto=Faster (-O2) with LTO
+#launchpad_mk2.menu.opt.o2lto.build.flags.optimize=-O2 -flto
+#launchpad_mk2.menu.opt.o2lto.build.flags.ldspecs=-flto
+launchpad_mk2.menu.opt.o3std=Fastest (-O3)
+launchpad_mk2.menu.opt.o3std.build.flags.optimize=-O3
+launchpad_mk2.menu.opt.o3std.build.flags.ldspecs=
+#launchpad_mk2.menu.opt.o3lto=Fastest (-O3) with LTO
+#launchpad_mk2.menu.opt.o3lto.build.flags.optimize=-O3 -flto
+#launchpad_mk2.menu.opt.o3lto.build.flags.ldspecs=-flto
+launchpad_mk2.menu.opt.ogstd=Debug (-g)
+launchpad_mk2.menu.opt.ogstd.build.flags.optimize=-Og
+launchpad_mk2.menu.opt.ogstd.build.flags.ldspecs=
+
+
+########################### Matrix (RET6) ###########################
+
+matrixRET6.name=Matrix (RET6)
+matrixRET6.vid.0=0x0203
+matrixRET6.pid.0=0x0100
+matrixRET6.build.variant=generic_stm32f103r
+matrixRET6.build.vect=VECT_TAB_ADDR=0x8000000
+matrixRET6.build.core=maple
+matrixRET6.build.board=GENERIC_STM32F103R
+matrixRET6.upload.use_1200bps_touch=false
+matrixRET6.upload.file_type=bin
+matrixRET6.upload.auto_reset=true
+matrixRET6.upload.tool=maple_upload
+matrixRET6.upload.protocol=maple_dfu
+
+matrixRET6.menu.device_variant.STM32F103RE=STM32F103RE (64k RAM. 512k Flash)
+matrixRET6.menu.device_variant.STM32F103RE.build.variant=generic_stm32f103r
+matrixRET6.menu.device_variant.STM32F103RE.build.cpu_flags=-DMCU_STM32F103RE
+matrixRET6.menu.device_variant.STM32F103RE.upload.maximum_size=524288
+matrixRET6.menu.device_variant.STM32F103RE.upload.maximum_data_size=65536
+matrixRET6.menu.device_variant.STM32F103RE.build.ldscript=ld/stm32f103re.ld
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+matrixRET6.menu.upload_method.DFUUploadMethod=Matrix bootloader
+matrixRET6.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+matrixRET6.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+matrixRET6.menu.upload_method.DFUUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+matrixRET6.menu.upload_method.DFUUploadMethod.build.vect=VECT_TAB_ADDR=0x8002000
+matrixRET6.menu.upload_method.DFUUploadMethod.build.ldscript=ld/bootloader.ld
+matrixRET6.menu.upload_method.DFUUploadMethod.upload.usbID=0203:0003
+matrixRET6.menu.upload_method.DFUUploadMethod.upload.altID=0
+
+#-- CPU Clock frequency
+matrixRET6.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
+matrixRET6.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
+
+matrixRET6.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
+matrixRET6.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
+
+matrixRET6.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
+matrixRET6.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
+
+
+#-- Optimizations
+matrixRET6.menu.opt.osstd=Smallest (default)
+#matrixRET6.menu.opt.oslto=Smallest Code with LTO
+#matrixRET6.menu.opt.oslto.build.flags.optimize=-Os -flto
+#matrixRET6.menu.opt.oslto.build.flags.ldspecs=-flto
+matrixRET6.menu.opt.o1std=Fast (-O1)
+matrixRET6.menu.opt.o1std.build.flags.optimize=-O1
+matrixRET6.menu.opt.o1std.build.flags.ldspecs=
+#matrixRET6.menu.opt.o1lto=Fast (-O1) with LTO
+#matrixRET6.menu.opt.o1lto.build.flags.optimize=-O1 -flto
+#matrixRET6.menu.opt.o1lto.build.flags.ldspecs=-flto
+matrixRET6.menu.opt.o2std=Faster (-O2)
+matrixRET6.menu.opt.o2std.build.flags.optimize=-O2
+matrixRET6.menu.opt.o2std.build.flags.ldspecs=
+#matrixRET6.menu.opt.o2lto=Faster (-O2) with LTO
+#matrixRET6.menu.opt.o2lto.build.flags.optimize=-O2 -flto
+#matrixRET6.menu.opt.o2lto.build.flags.ldspecs=-flto
+matrixRET6.menu.opt.o3std=Fastest (-O3)
+matrixRET6.menu.opt.o3std.build.flags.optimize=-O3
+matrixRET6.menu.opt.o3std.build.flags.ldspecs=
+#matrixRET6.menu.opt.o3lto=Fastest (-O3) with LTO
+#matrixRET6.menu.opt.o3lto.build.flags.optimize=-O3 -flto
+#matrixRET6.menu.opt.o3lto.build.flags.ldspecs=-flto
+matrixRET6.menu.opt.ogstd=Debug (-g)
+matrixRET6.menu.opt.ogstd.build.flags.optimize=-Og
+matrixRET6.menu.opt.ogstd.build.flags.ldspecs=
+
+########################### Matrix (RET6) ###########################
+
+matrixC8T6.name=Matrix (C8T6)
+matrixC8T6.vid.0=0x0203
+matrixC8T6.pid.0=0x0100
+matrixC8T6.build.variant=generic_stm32f103c
+matrixC8T6.build.vect=VECT_TAB_ADDR=0x8000000
+matrixC8T6.build.core=maple
+matrixC8T6.build.board=GENERIC_STM32F103C
+matrixC8T6.build.error_led_port=GPIOC
+matrixC8T6.build.error_led_pin=13
+matrixC8T6.upload.use_1200bps_touch=false
+matrixC8T6.upload.file_type=bin
+matrixC8T6.upload.auto_reset=true
+matrixC8T6.upload.tool=maple_upload
+matrixC8T6.upload.protocol=maple_dfu
+
+## STM32F103C8 -------------------------
+matrixC8T6.menu.device_variant.STM32F103C8=STM32F103C8 (20k RAM. 64k Flash)
+matrixC8T6.menu.device_variant.STM32F103C8.build.cpu_flags=-DMCU_STM32F103C8
+matrixC8T6.menu.device_variant.STM32F103C8.build.ldscript=ld/jtag_c8.ld
+matrixC8T6.menu.device_variant.STM32F103C8.upload.maximum_size=65536
+matrixC8T6.menu.device_variant.STM32F103C8.upload.maximum_data_size=20480
+
+## STM32F103CB -------------------------
+matrixC8T6.menu.device_variant.STM32F103CB=STM32F103CB (20k RAM. 128k Flash)
+matrixC8T6.menu.device_variant.STM32F103CB.build.cpu_flags=-DMCU_STM32F103CB
+matrixC8T6.menu.device_variant.STM32F103CB.build.ldscript=ld/jtag.ld
+matrixC8T6.menu.device_variant.STM32F103CB.upload.maximum_size=131072
+matrixC8T6.menu.device_variant.STM32F103CB.upload.maximum_data_size=20480
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+matrixC8T6.menu.upload_method.DFUUploadMethod=Matrix bootloader
+matrixC8T6.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+matrixC8T6.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+matrixC8T6.menu.upload_method.DFUUploadMethod.build.upload_flags=-DSERIAL_USB -DGENERIC_BOOTLOADER
+matrixC8T6.menu.upload_method.DFUUploadMethod.build.vect=VECT_TAB_ADDR=0x8002000
+matrixC8T6.menu.upload_method.DFUUploadMethod.build.ldscript=ld/bootloader_20.ld
+matrixC8T6.menu.upload_method.DFUUploadMethod.upload.usbID=0203:0003
+matrixC8T6.menu.upload_method.DFUUploadMethod.upload.altID=0
+
+#-- CPU Clock frequency
+matrixC8T6.menu.cpu_speed.speed_72mhz=72Mhz (Normal)
+matrixC8T6.menu.cpu_speed.speed_72mhz.build.f_cpu=72000000L
+
+matrixC8T6.menu.cpu_speed.speed_48mhz=48Mhz (Slow - with USB)
+matrixC8T6.menu.cpu_speed.speed_48mhz.build.f_cpu=48000000L
+
+matrixC8T6.menu.cpu_speed.speed_128mhz=Overclocked 128Mhz NO USB SERIAL. MANUAL RESET NEEDED TO UPLOAD
+matrixC8T6.menu.cpu_speed.speed_128mhz.build.f_cpu=128000000L
+
+#-- Optimizations
+matrixC8T6.menu.opt.osstd=Smallest (default)
+#matrixC8T6.menu.opt.oslto=Smallest Code with LTO
+#matrixC8T6.menu.opt.oslto.build.flags.optimize=-Os -flto
+#matrixC8T6.menu.opt.oslto.build.flags.ldspecs=-flto
+matrixC8T6.menu.opt.o1std=Fast (-O1)
+matrixC8T6.menu.opt.o1std.build.flags.optimize=-O1
+matrixC8T6.menu.opt.o1std.build.flags.ldspecs=
+#matrixC8T6.menu.opt.o1lto=Fast (-O1) with LTO
+#matrixC8T6.menu.opt.o1lto.build.flags.optimize=-O1 -flto
+#matrixC8T6.menu.opt.o1lto.build.flags.ldspecs=-flto
+matrixC8T6.menu.opt.o2std=Faster (-O2)
+matrixC8T6.menu.opt.o2std.build.flags.optimize=-O2
+matrixC8T6.menu.opt.o2std.build.flags.ldspecs=
+#matrixC8T6.menu.opt.o2lto=Faster (-O2) with LTO
+#matrixC8T6.menu.opt.o2lto.build.flags.optimize=-O2 -flto
+#matrixC8T6.menu.opt.o2lto.build.flags.ldspecs=-flto
+matrixC8T6.menu.opt.o3std=Fastest (-O3)
+matrixC8T6.menu.opt.o3std.build.flags.optimize=-O3
+matrixC8T6.menu.opt.o3std.build.flags.ldspecs=
+#matrixC8T6.menu.opt.o3lto=Fastest (-O3) with LTO
+#matrixC8T6.menu.opt.o3lto.build.flags.optimize=-O3 -flto
+#matrixC8T6.menu.opt.o3lto.build.flags.ldspecs=-flto
+matrixC8T6.menu.opt.ogstd=Debug (-g)
+matrixC8T6.menu.opt.ogstd.build.flags.optimize=-Og
+matrixC8T6.menu.opt.ogstd.build.flags.ldspecs=
+
 ##############################################################
 mapleMini.name=Maple Mini
 
