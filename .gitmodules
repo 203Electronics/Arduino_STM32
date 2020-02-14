@@ -7,3 +7,9 @@
 [submodule "tools/src/texane-stlink"]
 	path = tools/src/texane-stlink
 	url = https://github.com/texane/stlink
+[submodule "STM32F1/libraries/USBComposite"]
+	path = STM32F1/libraries/USBComposite
+	url = https://github.com/203Industries/USBComposite_stm32f1.git
+[submodule "STM32F1/libraries/FastLED"]
+	path = STM32F1/libraries/FastLED
+	url = https://github.com/203Industries/FastLED.git
