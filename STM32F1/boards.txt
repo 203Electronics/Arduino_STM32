@@ -115,7 +115,7 @@ matrixRET6.build.core=maple
 matrixRET6.build.board=GENERIC_STM32F103R
 matrixRET6.upload.use_1200bps_touch=false
 matrixRET6.upload.file_type=bin
-matrixRET6.upload.auto_reset=true
+matrixRET6.upload.auto_reset=false
 matrixRET6.upload.tool=maple_upload
 matrixRET6.upload.protocol=maple_dfu
 
@@ -188,7 +188,7 @@ matrixC8T6.build.error_led_port=GPIOC
 matrixC8T6.build.error_led_pin=13
 matrixC8T6.upload.use_1200bps_touch=false
 matrixC8T6.upload.file_type=bin
-matrixC8T6.upload.auto_reset=true
+matrixC8T6.upload.auto_reset=false
 matrixC8T6.upload.tool=maple_upload
 matrixC8T6.upload.protocol=maple_dfu
 
